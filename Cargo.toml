@@ -1,0 +1,12 @@
+[package]
+name = "sigmaos-rebuild"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+description = "SigmaOS component: rebuild"
+
+[dependencies]
+
+[[bin]]
+name = "sigmaos-rebuild"
+path = "src/main.rs"
