@@ -1,0 +1,5 @@
+# Declarative module list (NixOS-inspired)
+[modules]
+base = ["kernel", "boot", "users"]
+desktop = ["display", "network", "audio", "power"]
+services = ["ssh", "firewall", "printing"]
