@@ -1,12 +1,15 @@
 //! CLI for sigmaos-rebuild.
 
 use clap::Parser;
-use sigmaos_rebuild::{current_kernel, save_records, RebuildPlan, RebuildError};
+use sigmaos_rebuild::{current_kernel, save_records, RebuildError, RebuildPlan};
 use std::path::PathBuf;
 use std::process::Command;
 
 #[derive(Parser)]
-#[command(name = "sigmaos-rebuild", about = "SigmaOS system rebuild orchestrator")]
+#[command(
+    name = "sigmaos-rebuild",
+    about = "SigmaOS system rebuild orchestrator"
+)]
 struct Cli {
     /// Dry run: print steps without executing.
     #[arg(long)]
@@ -17,9 +20,9 @@ struct Cli {
 }
 
 fn run(cmd: &[String]) -> Result<(i32, String), RebuildError> {
-    let (prog, args) = cmd.split_first().ok_or_else(|| {
-        RebuildError::Validation("empty command".into())
-    })?;
+    let (prog, args) = cmd
+        .split_first()
+        .ok_or_else(|| RebuildError::Validation("empty command".into()))?;
     let out = Command::new(prog).args(args).output()?;
     let tail = String::from_utf8_lossy(&out.stdout)
         .lines()

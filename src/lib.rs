@@ -87,7 +87,11 @@ impl RebuildPlan {
                 },
                 RebuildStep {
                     name: "bootloader".into(),
-                    command: vec!["grub-mkconfig".into(), "-o".into(), "/boot/grub/grub.cfg".into()],
+                    command: vec![
+                        "grub-mkconfig".into(),
+                        "-o".into(),
+                        "/boot/grub/grub.cfg".into(),
+                    ],
                     required: false,
                     description: "Update bootloader config".into(),
                 },
@@ -132,11 +136,7 @@ impl RebuildPlan {
 
     /// Execute the plan. `dry_run` prints commands without executing.
     /// `runner` executes a command, returning (exit_code, output_tail).
-    pub fn execute<F>(
-        &self,
-        dry_run: bool,
-        mut runner: F,
-    ) -> Result<Vec<StepRecord>, RebuildError>
+    pub fn execute<F>(&self, dry_run: bool, mut runner: F) -> Result<Vec<StepRecord>, RebuildError>
     where
         F: FnMut(&[String]) -> Result<(i32, String), RebuildError>,
     {
