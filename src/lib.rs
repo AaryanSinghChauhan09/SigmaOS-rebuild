@@ -81,7 +81,7 @@ impl RebuildPlan {
                 },
                 RebuildStep {
                     name: "initramfs".into(),
-                    command: vec!["mkinitcpio".into(), "-P".into()],
+                    command: vec!["sigma-initramfs".into(), "--all".into()],
                     required: true,
                     description: "Regenerate initramfs images".into(),
                 },
